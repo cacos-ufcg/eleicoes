@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eleições CACOS - 2025/2026</title>
+    <!--
+        O código CSS foi embutido nesta tag <style> para facilitar o uso em um único arquivo.
+    -->
+    <style>
+        /* Estilo geral para o corpo do site, tipografia e cores.
+            Usamos variáveis CSS para facilitar a personalização das cores.
+        */
+        :root {
+            --primary-color: #333; /* Cor principal, usada em textos e fundos escuros */
+            --secondary-color: #f4f4f4; /* Cor secundária, usada para o fundo da página */
+            --accent-color: #007bff; /* Cor de destaque, usada em links e detalhes */
+            --card-bg: #fff; /* Cor de fundo dos "cards" de conteúdo */
+            --text-color: #555; /* Cor padrão do texto */
+            --border-color: #ddd; /* Cor das bordas */
+        }
+
+        /* Redefine as margens e paddings padrão para um controle maior do layout */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            scroll-behavior: smooth; /* Anima a rolagem quando se clica nos links do menu */
+        }
+
+        /*
+            Estilos para o cabeçalho.
+            Ele utiliza flexbox para alinhar os elementos e é fixo no topo.
+        */
+        .header {
+            background-color: #444; /* Cor cinza da barra superior */
+            color: var(--secondary-color);
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap; /* Permite que os elementos quebrem a linha em telas menores */
+            gap: 1rem;
+        }
+
+        .header-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .header-images {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .header-images img {
+            height: 40px;
+            width: auto;
+            border-radius: 5px;
+        }
+
+        /*
+            Estilos para o menu de navegação.
+        */
+        .navbar {
+            margin-top: 1rem;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            padding: 0;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .nav-links a:hover,
+        .nav-links a:focus {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Estilos para o contêiner principal do conteúdo.
+        */
+        .container {
+            max-width: 1100px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        /*
+            Estilos para as seções de conteúdo.
+            O padding e a margem são ajustados para evitar que o cabeçalho fixo cubra
+            o início do conteúdo ao clicar nos links.
+        */
+        .content-section {
+            padding-top: 4rem; 
+            margin-top: -3rem;  
+        }
+
+        /* Estilo para os "cards" que envolvem cada seção de conteúdo */
+        .card {
+            background-color: var(--card-bg);
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .card h2 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 0.5rem;
+        }
+
+        /* Estilos de parágrafos e listas */
+        .section-text p,
+        .section-text ul {
+            margin-bottom: 1rem;
+        }
+
+        .section-text p {
+            text-align: justify;
+        }
+
+        .section-text ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .section-text li {
+            background-color: var(--secondary-color);
+            padding: 0.75rem 1rem;
+            border-left: 3px solid var(--accent-color);
+            margin-bottom: 0.5rem;
+            border-radius: 4px;
+        }
+
+        .section-text a {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .section-text a:hover {
+            color: #0056b3;
+        }
+
+        /* Estilos para a tabela do calendário.
+            Usamos um fundo alternado para melhor leitura.
+        */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            background-color: #f9f9f9;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            background-color: var(--primary-color);
+            color: #fff;
+            font-weight: bold;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f1f1f1;
+        }
+
+        /* Estilos para o rodapé */
+        footer {
+            text-align: center;
+            padding: 1rem;
+            background-color: #333;
+            color: #f4f4f4;
+            margin-top: 2rem;
+        }
+
+        /*
+            Media queries para tornar o layout responsivo em telas menores.
+            O layout da tabela é alterado para uma visualização em bloco em mobile.
+        */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .header-images {
+                justify-content: center;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .card {
+                padding: 1rem;
+            }
+
+            .card h2 {
+                font-size: 1.5rem;
+            }
+
+            /* Estilos para a tabela em telas pequenas */
+            table, thead, tbody, th, td, tr {
+                display: block;
+            }
+
+            thead tr {
+                position: absolute;
+                top: -9999px;
+                left: -9999px;
+            }
+
+            tr {
+                margin: 0 0 1rem 0;
+                border: 1px solid var(--border-color);
+                border-radius: 8px;
+            }
+            
+            td {
+                border: none;
+                border-bottom: 1px solid var(--border-color);
+                position: relative;
+                padding-left: 50%;
+                text-align: right;
+            }
+
+            td::before {
+                content: attr(data-label);
+                position: absolute;
+                left: 0;
+                width: 45%;
+                padding-left: 1rem;
+                font-weight: bold;
+                text-align: left;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!--
+    Cabeçalho do site com o título, imagens e menu de navegação.
+    O cabeçalho é fixo no topo da página.
+    -->
+    <header class="header">
+        <div class="header-content">
+            <h1 class="header-title">Eleições CACOS - 2025/2026</h1>
+            <!-- As imagens podem ser substituídas por arquivos png, jpg ou svg. -->
+            <div class="header-images">
+                <img src="C:\Users\Claviano\Documents\1_ACADÊMICO\Docente\Cmissão eleitoral cacos 2025\cacos.16d1112ef38840998ea7.webp" alt="Logo CACOS">
+                <img src="C:\Users\Claviano\Documents\1_ACADÊMICO\Docente\Cmissão eleitoral cacos 2025\logo_vertical_negativo (2).png" alt="Logo UFCG">
+            </div>
+        </div>
+        <nav class="navbar">
+            <ul class="nav-links">
+                <li><a href="#inicio">Início</a></li>
+                <li><a href="#documentos">Documentos</a></li>
+                <li><a href="#calendario">Calendário Eleitoral</a></li>
+                <li><a href="#votacao">Votação</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!--
+    Seções principais da página. Cada seção corresponde a um item do menu
+    e contém o conteúdo específico.
+    -->
+    <main class="container">
+        
+        <!-- Seção 'Início' com informações sobre as eleições e o CACOS -->
+        <section id="inicio" class="content-section">
+            <div class="card">
+                <h2>Início</h2>
+                <div class="section-text">
+                    <strong>Sobre as eleições</strong>
+                    <p>
+                        As eleições para o <strong>Centro Acadêmico de Comunicação Social (CACOS)</strong> da Universidade Federal de Campina Grande (UFCG) estão abertas para o período de 2025-2026 e acontecerão em 3 de setembro de 2025 de modo virtual. O CACOS é o órgão de representação dos estudantes de graduação em Comunicação Social da UFCG.<br><br>
+                        As eleições ocorrerão por sufrágio universal e secreto, com o mandato da diretoria sendo de um ano. A chapa vencedora será a mais votada, e os candidatos devem ser alunos regularmente matriculados no curso de graduação em Comunicação Social.
+                    </p>
+                    <br>
+                    <strong>O que faz o Centro Acadêmico</strong>
+                    <p>
+                        <strong>Algumas das ações previstas para a chapa eleita incluem:</strong>
+                    </p>
+                    <ul>
+                        <li>Representar os interesses acadêmicos e disciplinares dos alunos de Comunicação Social.</li>
+                        <li>Promover a integração entre o corpo discente, docente, técnico-administrativo e demais entidades.</li>
+                        <li>Organizar e promover eventos educacionais, sociais, culturais, científicos e técnicos.</li>
+                        <li>Lutar contra injustiças sociais, ideológicas, políticas, religiosas, raciais, físicas, de gênero, de orientação sexual ou acadêmicas.</li>
+                        <li>Colaborar na formação dos estudantes para o exercício responsável da profissão e da cidadania.</li>
+                        <li>Defender o ensino público, gratuito, popular e de qualidade.</li>
+                        <li>Divulgar a prestação de contas semestralmente.</li>
+                        <li>Manter a situação fiscal e jurídica do Centro Acadêmico regularizada.</li>
+                    </ul>
+                    <br>
+                    <strong>Quem pode participar</strong>
+                    <p>
+                        Para compor uma chapa e concorrer à Diretoria do CACOS, os candidatos devem ser estudantes regularmente matriculados nos cursos de graduação em Comunicação Social da Universidade Federal de Campina Grande (UFCG). A eleição ocorre por meio de disputa entre chapas, e cada uma delas deve apresentar candidatos para todos os cargos da Diretoria.<br><br>
+                        A chapa vencedora será aquela que obtiver o maior número de votos. O voto nas eleições é facultativo e secreto, e não é permitido votar por procuração. O mandato da Diretoria é de 1 (um) ano a partir da sua homologação.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção 'Documentos' com links para download -->
+        <section id="documentos" class="content-section">
+            <div class="card">
+                <h2>Documentos</h2>
+                <div class="section-text">
+                    <p>Acesse e baixe os documentos necessários para a realização de sua inscrição. Não deixe de ler o edital. Inscrições que não atendam as definições do edital serão desconsideradas.</p>
+                    <ul>
+                        <li><a href="https://is.gd/estatutocacos" target="_blank">Estatuto Cacos</a></li>
+                        <li><a href="https://is.gd/editalcacos2025" target="_blank">Edital</a></li>
+                        <li><a href="https://is.gd/fichadeinscricao2025" target="_blank">Ficha de inscrição</a></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção 'Calendário Eleitoral' com uma tabela -->
+        <section id="calendario" class="content-section">
+            <div class="card">
+                <h2>Calendário Eleitoral</h2>
+                <div class="section-text">
+                    <p>Confira as datas importantes do processo eleitoral Cacos 2025-2026:</p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Data</th>
+                                <th>Evento</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>18/08</td>
+                                <td>Lançamento do Edital</td>
+                            </tr>
+                            <tr>
+                                <td>19/08 à 22/08</td>
+                                <td>Período de inscrições das chapas</td>
+                            </tr>
+                            <tr>
+                                <td>26/08</td>
+                                <td>Homologação das chapas</td>
+                            </tr>
+                            <tr>
+                                <td>27/08 à 02/09</td>
+                                <td>Campanha das chapas</td>
+                            </tr>
+                            <tr>
+                                <td>03/09</td>
+                                <td>Eleições e divulgação dos resultados</td>
+                            </tr>
+                            <tr>
+                                <td>04/09</td>
+                                <td>Posse da gestão eleita</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção 'Votação' com status atual -->
+        <section id="votacao" class="content-section">
+            <div class="card">
+                <h2>Votação</h2>
+                <div class="section-text">
+                    <p>Aguardando homologação das chapas</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Rodapé simples do site -->
+    <footer>
+        <p>&copy; 2025 Eleições CACOS. Todos os direitos reservados.</p>
+    </footer>
+
+</body>
+</html>
